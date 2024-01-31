@@ -9,6 +9,7 @@ const info = document.querySelector('.table-container');
 buttonSearch.addEventListener('click', (e) => {
     e.preventDefault();
 
+
     let inputValueResponse = inputValue.value;
 
 
@@ -21,7 +22,8 @@ buttonSearch.addEventListener('click', (e) => {
         .get(`https://viacep.com.br/ws/${inputValueResponse}/json/`)
         .then(function(response){
 
-            
+            tableContent.innerHTML = "";
+            tableTitle.innerHTML = "";
             createTextTd(response.data.logradouro);
             createTextTd(response.data.bairro );
             createTextTd(response.data.localidade + '/' + response.data.uf);
@@ -32,10 +34,11 @@ buttonSearch.addEventListener('click', (e) => {
             createTitle('Bairro');
             createTitle('Cidade');
             createTitle('CEP');
-            
+    })
+    .catch(function (){
+        alert('Ops! Algo deu errado')
 
-           
-    });
+    })
 
 })
 
